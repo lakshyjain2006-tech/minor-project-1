@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Blood-Bridge | Admin Verification
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #f4f6f9;
+
+            color:
+                #222;
+
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        header {
+
+            background:
+                #e51635;
+
+            color:
+                white;
+
+            padding:
+                22px;
+
+        }
+
+
+        .header-inner {
+
+            max-width:
+                1100px;
+
+            margin:
+                auto;
+
+        }
+
+
+        header h1 {
+
+            margin:
+                0;
+
+        }
+
+
+        header p {
+
+            margin:
+                6px 0 0;
+
+        }
+
+
+        /* ================================
+           CONTAINER
+        ================================= */
+
+        .container {
+
+            max-width:
+                1100px;
+
+            margin:
+                35px auto;
+
+            padding:
+                0 20px;
+
+        }
+
+
+        /* ================================
+           ADMIN LOGIN
+        ================================= */
+
+        .admin-box {
+
+            background:
+                white;
+
+            padding:
+                25px;
+
+            border-radius:
+                10px;
+
+            box-shadow:
+                0 4px 20px
+                rgba(0,0,0,0.08);
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+        .admin-box h2 {
+
+            margin-top:
+                0;
+
+        }
+
+
+        .key-row {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+        }
+
+
+        .key-row input {
+
+            flex:
+                1;
+
+            padding:
+                12px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius:
+                6px;
+
+            font-size:
+                15px;
+
+        }
+
+
+        button {
+
+            border:
+                none;
+
+            border-radius:
+                6px;
+
+            padding:
+                11px 16px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .load-btn {
+
+            background:
+                #e51635;
+
+            color:
+                white;
+
+        }
+
+
+        .load-btn:hover {
+
+            background:
+                #c8102e;
+
+        }
+
+
+        /* ================================
+           STATUS
+        ================================= */
+
+        .status {
+
+            display:
+                none;
+
+            margin-top:
+                15px;
+
+            padding:
+                12px;
+
+            border-radius:
+                6px;
+
+        }
+
+
+        .status.error {
+
+            display:
+                block;
+
+            background:
+                #fff0f0;
+
+            color:
+                #a00000;
+
+            border:
+                1px solid #e0aaaa;
+
+        }
+
+
+        .status.success {
+
+            display:
+                block;
+
+            background:
+                #eaf8ef;
+
+            color:
+                #146c38;
+
+            border:
+                1px solid #a9dcb9;
+
+        }
+
+
+        /* ================================
+           SUMMARY
+        ================================= */
+
+        .summary {
+
+            display:
+                flex;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                25px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .summary-card {
+
+            background:
+                white;
+
+            padding:
+                18px 25px;
+
+            border-radius:
+                8px;
+
+            box-shadow:
+                0 3px 15px
+                rgba(0,0,0,0.06);
+
+            min-width:
+                180px;
+
+        }
+
+
+        .summary-number {
+
+            font-size:
+                28px;
+
+            font-weight:
+                700;
+
+            color:
+                #e51635;
+
+        }
+
+
+        /* ================================
+           DOCUMENT CARD
+        ================================= */
+
+        .document-card {
+
+            background:
+                white;
+
+            border-radius:
+                10px;
+
+            padding:
+                25px;
+
+            margin-bottom:
+                20px;
+
+            box-shadow:
+                0 3px 18px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .document-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            border-bottom:
+                1px solid #eee;
+
+            padding-bottom:
+                15px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .document-header h3 {
+
+            margin:
+                0;
+
+        }
+
+
+        .badge {
+
+            background:
+                #fff4d6;
+
+            color:
+                #946500;
+
+            padding:
+                6px 10px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* ================================
+           DETAILS
+        ================================= */
+
+        .details {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap:
+                10px 25px;
+
+        }
+
+
+        .detail {
+
+            padding:
+                8px 0;
+
+        }
+
+
+        .label {
+
+            color:
+                #777;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .value {
+
+            font-weight:
+                600;
+
+            margin-top:
+                3px;
+
+        }
+
+
+        /* ================================
+           ACTIONS
+        ================================= */
+
+        .actions {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            margin-top:
+                20px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .view-btn {
+
+            background:
+                #333;
+
+            color:
+                white;
+
+        }
+
+
+        .verify-btn {
+
+            background:
+                #16894f;
+
+            color:
+                white;
+
+        }
+
+
+        .reject-btn {
+
+            background:
+                #d71938;
+
+            color:
+                white;
+
+        }
+
+
+        button:disabled {
+
+            opacity:
+                0.5;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* ================================
+           EMPTY
+        ================================= */
+
+        .empty {
+
+            background:
+                white;
+
+            padding:
+                40px;
+
+            text-align:
+                center;
+
+            border-radius:
+                10px;
+
+            color:
+                #666;
+
+        }
+
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .details {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .key-row {
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .document-header {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-inner">
+
+        <h1>
+            🩸 Blood-Bridge Admin
+        </h1>
+
+        <p>
+            Hospital & Medical Document Verification
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- =================================
+         ADMIN KEY
+    ================================== -->
+
+    <section class="admin-box">
+
+        <h2>
+            🔐 Admin Access
+        </h2>
+
+        <p>
+            Enter the development admin key
+            to access pending verification requests.
+        </p>
+
+
+        <div class="key-row">
+
+            <input
+                type="password"
+                id="adminKey"
+                placeholder="Enter admin key"
+            >
+
+
+            <button
+                class="load-btn"
+                id="loadButton"
+            >
+                Load Pending Documents
+            </button>
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+    </section>
+
+
+    <!-- =================================
+         SUMMARY
+    ================================== -->
+
+    <div
+        id="summary"
+        class="summary"
+        style="display:none;"
+    >
+
+        <div class="summary-card">
+
+            <div>
+                Pending Documents
+            </div>
+
+            <div
+                class="summary-number"
+                id="pendingCount"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         DOCUMENTS
+    ================================== -->
+
+    <section
+        id="documents"
+    ></section>
+
+
+</main>
+
+
+<script>
+
+
+// =====================================
+// ELEMENTS
+// =====================================
+
+const adminKeyInput =
+    document.getElementById(
+        "adminKey"
+    );
+
+
+const loadButton =
+    document.getElementById(
+        "loadButton"
+    );
+
+
+const statusBox =
+    document.getElementById(
+        "status"
+    );
+
+
+const summary =
+    document.getElementById(
+        "summary"
+    );
+
+
+const pendingCount =
+    document.getElementById(
+        "pendingCount"
+    );
+
+
+const documentsContainer =
+    document.getElementById(
+        "documents"
+    );
+
+
+// =====================================
+// SHOW STATUS
+// =====================================
+
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        `status ${type}`;
+
+}
+
+
+// =====================================
+// ESCAPE HTML
+// =====================================
+
+function escapeHtml(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// =====================================
+// LOAD PENDING DOCUMENTS
+// =====================================
+
+async function loadPendingDocuments() {
+
+    const adminKey =
+        adminKeyInput
+            .value
+            .trim();
+
+
+    if (!adminKey) {
+
+        showStatus(
+            "Please enter the admin key.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    loadButton.disabled =
+        true;
+
+    loadButton.textContent =
+        "Loading...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/documents/admin/pending",
+                {
+
+                    headers: {
+
+                        "x-admin-key":
+                            adminKey
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load documents"
+            );
+
+        }
+
+
+        showStatus(
+            "Pending documents loaded successfully.",
+            "success"
+        );
+
+
+        pendingCount.textContent =
+            data.count;
+
+
+        summary.style.display =
+            "flex";
+
+
+        renderDocuments(
+            data.documents
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+            error.message ||
+            "Unable to load pending documents.",
+            "error"
+        );
+
+
+        documentsContainer.innerHTML =
+            "";
+
+        summary.style.display =
+            "none";
+
+
+    } finally {
+
+        loadButton.disabled =
+            false;
+
+        loadButton.textContent =
+            "Load Pending Documents";
+
+    }
+
+}
+
+
+// =====================================
+// RENDER DOCUMENTS
+// =====================================
+
+function renderDocuments(
+    documents
+) {
+
+    if (
+        !Array.isArray(
+            documents
+        ) ||
+        documents.length === 0
+    ) {
+
+        documentsContainer.innerHTML = `
+
+            <div class="empty">
+
+                <h2>
+                    ✅ No Pending Documents
+                </h2>
+
+                <p>
+                    There are currently no documents
+                    waiting for verification.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    documentsContainer.innerHTML =
+        "";
+
+
+    documents.forEach(
+        documentData => {
+
+            const owner =
+                documentData.owner ||
+                {};
+
+
+            const isHospital =
+                documentData.ownerType ===
+                "hospital";
+
+
+            const ownerName =
+                isHospital
+                    ? (
+                        owner.hospitalName ||
+                        "Unknown Hospital"
+                    )
+                    : (
+                        owner.name ||
+                        "Unknown Donor"
+                    );
+
+
+            const registrationNumber =
+                owner.registrationNumber ||
+                "Not provided";
+
+
+            const documentType =
+                documentData.documentType ||
+                "Unknown";
+
+
+            const fileName =
+                documentData.originalFileName ||
+                "Unknown";
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "document-card";
+
+
+            card.innerHTML = `
+
+                <div class="document-header">
+
+                    <div>
+
+                        <h3>
+                            ${
+                                isHospital
+                                    ? "🏥"
+                                    : "🩸"
+                            }
+
+                            ${escapeHtml(
+                                ownerName
+                            )}
+
+                        </h3>
+
+                    </div>
+
+                    <span class="badge">
+
+                        🟡 Pending
+
+                    </span>
+
+                </div>
+
+
+                <div class="details">
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            Owner Type
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                documentData.ownerType
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            Document Type
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                documentType
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            Registration Number
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                registrationNumber
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            File
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                fileName
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            Document ID
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                documentData.id
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail">
+
+                        <div class="label">
+                            Owner ID
+                        </div>
+
+                        <div class="value">
+
+                            ${escapeHtml(
+                                documentData.ownerId
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="actions">
+
+
+                    <button
+                        class="view-btn"
+                        data-action="view"
+                        data-id="${escapeHtml(
+                            documentData.id
+                        )}"
+                    >
+
+                        📄 View Document
+
+                    </button>
+
+
+                    <button
+                        class="verify-btn"
+                        data-action="verify"
+                        data-id="${escapeHtml(
+                            documentData.id
+                        )}"
+                    >
+
+                        ✅ Verify
+
+                    </button>
+
+
+                    <button
+                        class="reject-btn"
+                        data-action="reject"
+                        data-id="${escapeHtml(
+                            documentData.id
+                        )}"
+                    >
+
+                        ❌ Reject
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            documentsContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+// =====================================
+// VIEW DOCUMENT
+// =====================================
+
+async function viewDocument(
+    documentId
+) {
+
+    const adminKey =
+        adminKeyInput
+            .value
+            .trim();
+
+
+    const url =
+        `/api/documents/admin/${documentId}/file`;
+
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+
+                    headers: {
+
+                        "x-admin-key":
+                            adminKey
+
+                    }
+
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            const data =
+                await response.json();
+
+            throw new Error(
+                data.message ||
+                "Unable to open document"
+            );
+
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        const blobUrl =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        window.open(
+            blobUrl,
+            "_blank"
+        );
+
+
+    } catch (error) {
+
+        showStatus(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+// =====================================
+// VERIFY DOCUMENT
+// =====================================
+
+async function verifyDocument(
+    documentId
+) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to verify this document?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    const adminKey =
+        adminKeyInput
+            .value
+            .trim();
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/documents/admin/${documentId}/verify`,
+                {
+
+                    method:
+                        "PATCH",
+
+                    headers: {
+
+                        "x-admin-key":
+                            adminKey
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Verification failed"
+            );
+
+        }
+
+
+        showStatus(
+            "✅ Document verified successfully.",
+            "success"
+        );
+
+
+        await loadPendingDocuments();
+
+
+    } catch (error) {
+
+        showStatus(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+// =====================================
+// REJECT DOCUMENT
+// =====================================
+
+async function rejectDocument(
+    documentId
+) {
+
+    const reason =
+        prompt(
+            "Enter the reason for rejecting this document:"
+        );
+
+
+    if (
+        reason === null
+    ) {
+
+        return;
+
+    }
+
+
+    const trimmedReason =
+        reason.trim();
+
+
+    if (
+        trimmedReason.length < 5
+    ) {
+
+        showStatus(
+            "Rejection reason must contain at least 5 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const adminKey =
+        adminKeyInput
+            .value
+            .trim();
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/documents/admin/${documentId}/reject`,
+                {
+
+                    method:
+                        "PATCH",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "x-admin-key":
+                            adminKey
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            rejectionReason:
+                                trimmedReason
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data.message ||
+                "Rejection failed"
+            );
+
+        }
+
+
+        showStatus(
+            "❌ Document rejected successfully.",
+            "success"
+        );
+
+
+        await loadPendingDocuments();
+
+
+    } catch (error) {
+
+        showStatus(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+// =====================================
+// BUTTON EVENTS
+// =====================================
+
+documentsContainer.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            event.target.closest(
+                "button"
+            );
+
+
+        if (!button) {
+
+            return;
+
+        }
+
+
+        const action =
+            button.dataset.action;
+
+
+        const documentId =
+            button.dataset.id;
+
+
+        if (
+            action ===
+            "view"
+        ) {
+
+            viewDocument(
+                documentId
+            );
+
+        }
+
+
+        if (
+            action ===
+            "verify"
+        ) {
+
+            verifyDocument(
+                documentId
+            );
+
+        }
+
+
+        if (
+            action ===
+            "reject"
+        ) {
+
+            rejectDocument(
+                documentId
+            );
+
+        }
+
+    }
+);
+
+
+// =====================================
+// LOAD BUTTON
+// =====================================
+
+loadButton.addEventListener(
+    "click",
+    loadPendingDocuments
+);
+
+
+// =====================================
+// ENTER KEY
+// =====================================
+
+adminKeyInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            loadPendingDocuments();
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Blood-Bridge | Donor Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/donor-dashboard.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="dashboard-page">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>🩸 Blood-Bridge</h1>
+
+                <p>
+                    Donor Dashboard
+                </p>
+            </div>
+
+            <div class="donor-status">
+                🟢 Available
+            </div>
+
+        </header>
+
+
+        <!-- DONOR INFORMATION -->
+
+        <section class="donor-info">
+
+            <h2>
+                👤 Donor Information
+            </h2>
+
+            <div class="info-grid">
+
+                <div>
+                    <span>Donor</span>
+                    <strong id="donorName">
+                        Loading...
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Blood Group</span>
+                    <strong id="donorBloodGroup">
+                        Loading...
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EMERGENCY REQUESTS -->
+
+        <section class="requests-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        🚨 Emergency Requests
+                    </h2>
+
+                    <p>
+                        Nearby patients who may need your blood
+                    </p>
+
+                </div>
+
+                <button
+                    id="refreshButton"
+                    class="refresh-btn"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loading"
+                class="loading"
+            >
+                🔎 Finding emergency requests...
+            </div>
+
+
+            <!-- REQUESTS -->
+
+            <div
+                id="requestsContainer"
+                class="requests-container"
+            ></div>
+
+
+            <!-- NO REQUESTS -->
+
+            <div
+                id="noRequests"
+                class="no-requests"
+                style="display: none;"
+            >
+
+                <div class="empty-icon">
+                    🩸
+                </div>
+
+                <h3>
+                    No Emergency Requests
+                </h3>
+
+                <p>
+                    There are currently no compatible
+                    emergency requests near you.
+                </p>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="errorMessage"
+                class="error-message"
+                style="display: none;"
+            ></div>
+
+        </section>
+
+
+        <footer>
+
+            Blood-Bridge © 2026
+
+        </footer>
+
+    </div>
+
+
+    <script
+    type="module"
+    src="/js/donor-dashboard.js"
+    ></script>
+
+</body>
+
+</html>

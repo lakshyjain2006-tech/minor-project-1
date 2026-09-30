@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Blood-Bridge | Emergency Request</title>
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Emergency Page CSS -->
+    <link
+        rel="stylesheet"
+        href="/css/emergency.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="emergency-page">
+
+    <!-- ===============================
+         HEADER
+         =============================== -->
+
+    <header class="emergency-header">
+
+        <h1>🩸 Blood-Bridge</h1>
+
+        <p>
+            Emergency Blood Request
+        </p>
+
+    </header>
+
+
+    <!-- ===============================
+         MAIN CARD
+         =============================== -->
+
+    <div class="emergency-card">
+
+        <h2>
+            🚨 Request Blood
+        </h2>
+
+
+        <form id="emergencyForm">
+
+            <!-- ===============================
+                 PATIENT NAME
+                 =============================== -->
+
+            <div class="form-group">
+
+                <label for="patientName">
+                    Patient Name
+                </label>
+
+                <input
+                    type="text"
+                    id="patientName"
+                    placeholder="Enter patient name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ===============================
+                 BLOOD GROUP + UNITS
+                 =============================== -->
+
+            <div class="row">
+
+                <div class="form-group">
+
+                    <label for="bloodGroup">
+                        Blood Group
+                    </label>
+
+                    <select
+                        id="bloodGroup"
+                        required
+                    >
+
+                        <option value="">
+                            Select Blood Group
+                        </option>
+
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="unitsRequired">
+                        Units Required
+                    </label>
+
+                    <input
+                        type="number"
+                        id="unitsRequired"
+                        min="1"
+                        max="10"
+                        value="1"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ===============================
+                 HOSPITAL
+                 =============================== -->
+
+            <div class="form-group">
+
+                <label for="hospitalName">
+                    Hospital Name
+                </label>
+
+                <input
+                    type="text"
+                    id="hospitalName"
+                    placeholder="Enter hospital name"
+                >
+
+            </div>
+
+
+            <!-- ===============================
+                 EMERGENCY LOCATION
+                 =============================== -->
+
+            <section class="location-section">
+
+                <h3>
+                    📍 Emergency Location
+                </h3>
+
+
+                <!-- LOCATION SEARCH -->
+
+                <div class="location-search">
+
+                    <input
+                        type="text"
+                        id="locationSearch"
+                        placeholder="🔎 Search hospital or location..."
+                        autocomplete="off"
+                    >
+
+                    <div
+                        id="searchSuggestions"
+                        class="search-suggestions"
+                    ></div>
+
+                </div>
+
+
+                <!-- GPS BUTTON -->
+
+                <button
+                    type="button"
+                    class="location-btn"
+                    id="locationButton"
+                >
+                    📍 Use My Location
+                </button>
+
+
+                <!-- LOCATION STATUS -->
+
+                <div
+                    id="locationStatus"
+                    class="location-status"
+                >
+                    Location not selected
+                </div>
+
+
+                <!-- MAP -->
+
+                <div id="emergencyMap"></div>
+
+            </section>
+
+
+            <!-- ===============================
+                 SEARCH RADIUS
+                 =============================== -->
+
+            <div class="form-group">
+
+                <label for="radius">
+                    Search Radius
+                </label>
+
+                <select id="radius">
+
+                    <option value="5">
+                        5 km
+                    </option>
+
+                    <option value="10" selected>
+                        10 km
+                    </option>
+
+                    <option value="20">
+                        20 km
+                    </option>
+
+                    <option value="30">
+                        30 km
+                    </option>
+
+                    <option value="50">
+                        50 km
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ===============================
+                 FIND DONORS BUTTON
+                 =============================== -->
+
+            <button
+                type="submit"
+                class="emergency-btn"
+                id="emergencyButton"
+            >
+                🚨 Find Blood Donors
+            </button>
+
+        </form>
+
+
+        <!-- ===============================
+             RESULTS
+             =============================== -->
+
+        <div
+            id="result"
+            class="results"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- ===============================
+     LEAFLET JS
+     =============================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- ===============================
+     EMERGENCY JS
+     =============================== -->
+
+<script src="/js/emergency.js"></script>
+
+
+</body>
+
+</html>

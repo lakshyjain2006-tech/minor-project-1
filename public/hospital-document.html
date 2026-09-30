@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Blood-Bridge | Hospital Document Verification
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .header {
+            background: #e51635;
+            color: white;
+            padding: 22px 20px;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+
+        /* ================================
+           PAGE
+        ================================= */
+
+        .page {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+
+        /* ================================
+           CARD
+        ================================= */
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow:
+                0 5px 25px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+
+        /* ================================
+           FORM
+        ================================= */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #e51635;
+        }
+
+
+        /* ================================
+           FILE BOX
+        ================================= */
+
+        .file-box {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            background: #fafafa;
+            transition: 0.2s;
+        }
+
+        .file-box:hover {
+            border-color: #e51635;
+            background: #fff7f8;
+        }
+
+        .file-box input {
+            border: none;
+            padding: 0;
+            background: transparent;
+        }
+
+        .file-help {
+            margin-top: 10px;
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           BUTTON
+        ================================= */
+
+        .upload-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #e51635;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .upload-btn:hover {
+            background: #c8102e;
+        }
+
+        .upload-btn:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+
+        /* ================================
+           STATUS
+        ================================= */
+
+        .status {
+            display: none;
+            margin-top: 25px;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .status.success {
+            display: block;
+            background: #e8f8ef;
+            border: 1px solid #a7dfbd;
+            color: #146c38;
+        }
+
+        .status.error {
+            display: block;
+            background: #fff0f0;
+            border: 1px solid #f0b5b5;
+            color: #a40000;
+        }
+
+
+        /* ================================
+           DOCUMENT INFO
+        ================================= */
+
+        .document-info {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 8px;
+            background: #f6f7f9;
+            border: 1px solid #ddd;
+        }
+
+        .document-info h3 {
+            margin-top: 0;
+        }
+
+        .document-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .document-row:last-child {
+            border-bottom: none;
+        }
+
+        .document-label {
+            font-weight: 600;
+        }
+
+
+        .pending {
+            color: #a66b00;
+            font-weight: 700;
+        }
+
+
+        /* ================================
+           NOTICE
+        ================================= */
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff8e6;
+            border: 1px solid #f0d58a;
+            border-radius: 8px;
+            color: #705500;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .page {
+                margin: 20px auto;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .document-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     HEADER
+================================= -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>
+            🩸 Blood-Bridge
+        </h1>
+
+        <p>
+            Hospital Document Verification
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- =================================
+     PAGE
+================================= -->
+
+<main class="page">
+
+
+    <div class="card">
+
+        <h2>
+            🏥 Upload Hospital Document
+        </h2>
+
+        <p class="subtitle">
+            Upload your official hospital registration
+            certificate for verification.
+        </p>
+
+
+        <!-- =============================
+             FORM
+        ============================== -->
+
+        <form
+            id="documentForm"
+        >
+
+
+            <!-- Hospital ID -->
+
+            <div class="form-group">
+
+                <label
+                    for="hospitalId"
+                >
+                    Hospital ID
+                </label>
+
+                <input
+                    type="text"
+                    id="hospitalId"
+                    placeholder="Enter your Hospital ID"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Document Type -->
+
+            <div class="form-group">
+
+                <label
+                    for="documentType"
+                >
+                    Document Type
+                </label>
+
+                <select
+                    id="documentType"
+                    required
+                >
+
+                    <option value="">
+                        Select document type
+                    </option>
+
+                    <option
+                        value="hospital_registration_certificate"
+                    >
+                        Hospital Registration Certificate
+                    </option>
+
+                    <option
+                        value="hospital_license"
+                    >
+                        Hospital License
+                    </option>
+
+                    <option
+                        value="blood_bank_certificate"
+                    >
+                        Blood Bank Certificate
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- File -->
+
+            <div class="form-group">
+
+                <label>
+                    Document File
+                </label>
+
+                <div class="file-box">
+
+                    <input
+                        type="file"
+                        id="document"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        required
+                    >
+
+                    <div class="file-help">
+
+                        Accepted:
+                        PDF, JPG, JPEG, PNG
+
+                        <br>
+
+                        Maximum size:
+                        5 MB
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Upload -->
+
+            <button
+                type="submit"
+                class="upload-btn"
+                id="uploadButton"
+            >
+
+                📄 Upload Document
+
+            </button>
+
+
+        </form>
+
+
+        <!-- =============================
+             STATUS
+        ============================== -->
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+
+        <!-- =============================
+             DOCUMENT INFO
+        ============================== -->
+
+        <div
+            id="documentInfo"
+            class="document-info"
+        >
+
+            <h3>
+                📄 Document Submitted
+            </h3>
+
+
+            <div class="document-row">
+
+                <span class="document-label">
+                    Document ID
+                </span>
+
+                <span id="documentId">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="document-row">
+
+                <span class="document-label">
+                    File
+                </span>
+
+                <span id="fileName">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="document-row">
+
+                <span class="document-label">
+                    Status
+                </span>
+
+                <span class="pending">
+                    🟡 Pending Verification
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================
+             NOTICE
+        ============================== -->
+
+        <div class="notice">
+
+            🔒 <strong>Privacy Notice:</strong>
+
+            Your uploaded document is used only for
+            hospital verification. It is not displayed
+            to emergency blood requesters or other
+            donors.
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+
+// =====================================
+// ELEMENTS
+// =====================================
+
+const form =
+    document.getElementById(
+        "documentForm"
+    );
+
+
+const hospitalIdInput =
+    document.getElementById(
+        "hospitalId"
+    );
+
+
+const documentTypeInput =
+    document.getElementById(
+        "documentType"
+    );
+
+
+const documentInput =
+    document.getElementById(
+        "document"
+    );
+
+
+const uploadButton =
+    document.getElementById(
+        "uploadButton"
+    );
+
+
+const statusBox =
+    document.getElementById(
+        "status"
+    );
+
+
+const documentInfo =
+    document.getElementById(
+        "documentInfo"
+    );
+
+
+const documentId =
+    document.getElementById(
+        "documentId"
+    );
+
+
+const fileName =
+    document.getElementById(
+        "fileName"
+    );
+
+
+// =====================================
+// SHOW STATUS
+// =====================================
+
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        `status ${type}`;
+
+}
+
+
+// =====================================
+// FORM SUBMIT
+// =====================================
+
+form.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        // =================================
+        // VALUES
+        // =================================
+
+        const hospitalId =
+            hospitalIdInput
+                .value
+                .trim();
+
+
+        const documentType =
+            documentTypeInput
+                .value;
+
+
+        const file =
+            documentInput
+                .files[0];
+
+
+        // =================================
+        // VALIDATE HOSPITAL ID
+        // =================================
+
+        if (
+            hospitalId.length < 3
+        ) {
+
+            showStatus(
+                "Please enter a valid Hospital ID.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        // =================================
+        // VALIDATE DOCUMENT TYPE
+        // =================================
+
+        if (!documentType) {
+
+            showStatus(
+                "Please select a document type.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        // =================================
+        // VALIDATE FILE
+        // =================================
+
+        if (!file) {
+
+            showStatus(
+                "Please select a document file.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        // =================================
+        // FILE SIZE
+        // =================================
+
+        const maxSize =
+            5 * 1024 * 1024;
+
+
+        if (
+            file.size >
+            maxSize
+        ) {
+
+            showStatus(
+                "File size must not exceed 5 MB.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        // =================================
+        // FILE TYPE
+        // =================================
+
+        const allowedTypes = [
+
+            "application/pdf",
+
+            "image/jpeg",
+
+            "image/png"
+
+        ];
+
+
+        if (
+            !allowedTypes.includes(
+                file.type
+            )
+        ) {
+
+            showStatus(
+                "Only PDF, JPG, JPEG and PNG files are allowed.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        // =================================
+        // DISABLE BUTTON
+        // =================================
+
+        uploadButton.disabled =
+            true;
+
+        uploadButton.textContent =
+            "⏳ Uploading...";
+
+
+        statusBox.className =
+            "status";
+
+
+        documentInfo.style.display =
+            "none";
+
+
+        try {
+
+            // =============================
+            // FORM DATA
+            // =============================
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "ownerType",
+                "hospital"
+            );
+
+
+            formData.append(
+                "ownerId",
+                hospitalId
+            );
+
+
+            formData.append(
+                "documentType",
+                documentType
+            );
+
+
+            formData.append(
+                "document",
+                file
+            );
+
+
+            // =============================
+            // API REQUEST
+            // =============================
+
+            const response =
+                await fetch(
+                    "/api/documents/upload",
+                    {
+                        method:
+                            "POST",
+
+                        body:
+                            formData
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            // =============================
+            // ERROR
+            // =============================
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Document upload failed"
+                );
+
+            }
+
+
+            // =============================
+            // SUCCESS
+            // =============================
+
+            showStatus(
+                "✅ Document uploaded successfully. It is now waiting for admin verification.",
+                "success"
+            );
+
+
+            documentId.textContent =
+                data.documentId ||
+                "-";
+
+
+            fileName.textContent =
+                file.name;
+
+
+            documentInfo.style.display =
+                "block";
+
+
+            // =============================
+            // RESET FILE
+            // =============================
+
+            documentInput.value =
+                "";
+
+
+        } catch (error) {
+
+            console.error(
+                "Document upload error:",
+                error
+            );
+
+
+            showStatus(
+                error.message ||
+                "Unable to upload document.",
+                "error"
+            );
+
+        } finally {
+
+            uploadButton.disabled =
+                false;
+
+            uploadButton.textContent =
+                "📄 Upload Document";
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
