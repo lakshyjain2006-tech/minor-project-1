@@ -40,6 +40,9 @@ const hospitalRoutes =
 const documentRoutes =
     require("./routes/documentRoutes");
 
+const nearbyDonorRoutes =
+    require("./routes/nearbyDonorRoutes");
+
 
 // =====================================
 // APP
@@ -114,6 +117,11 @@ app.use(
 app.use(
     "/api/documents",
     documentRoutes
+);
+
+app.use(
+    "/api/nearby-donors",
+    nearbyDonorRoutes
 );
 
 

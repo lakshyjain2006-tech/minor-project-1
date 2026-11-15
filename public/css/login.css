@@ -1,298 +1,157 @@
-/* =====================================
-   BLOOD-BRIDGE LOGIN
-   ===================================== */
+/* =============================================
+   BLOOD-BRIDGE — LOGIN
+   ============================================= */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+@import url('./vars.css');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff5f6,
-            #f7f7f7
-        );
-
+    font-family: var(--font);
+    background: var(--bg);
     min-height: 100vh;
-
-    color: #222;
-
+    color: var(--text-primary);
+    line-height: 1.5;
 }
-
-
-/* =====================================
-   PAGE
-   ===================================== */
 
 .login-page {
-
-    min-height: 100vh;
-
+    min-height: calc(100vh - 60px);
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    padding: 20px;
-
+    padding: 32px 16px;
 }
 
-
-/* =====================================
-   CARD
-   ===================================== */
-
+/* ---- Card ---- */
 .login-card {
-
     width: 100%;
-
     max-width: 420px;
-
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 8px 30px
-        rgba(0, 0, 0, 0.10);
-
+    background: var(--surface);
+    padding: 40px 36px;
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
     text-align: center;
-
 }
 
-
-/* =====================================
-   LOGO
-   ===================================== */
-
+/* ---- Branding ---- */
 .logo {
-
-    font-size: 48px;
-
-    margin-bottom: 8px;
-
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--red-dark), var(--red));
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 14px rgba(224,31,60,.30);
 }
 
 .login-card h1 {
-
-    color: #e3293b;
-
-    font-size: 28px;
-
-    margin-bottom: 5px;
-
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: -.3px;
 }
-
 .subtitle {
-
-    color: #777;
-
+    color: var(--text-secondary);
     font-size: 14px;
-
-    margin-bottom: 25px;
-
+    margin-bottom: 28px;
 }
 
-
-/* =====================================
-   FORM
-   ===================================== */
-
+/* ---- Form ---- */
 .form-group {
-
     text-align: left;
-
-    margin-bottom: 17px;
-
+    margin-bottom: 18px;
 }
-
 .form-group label {
-
     display: block;
-
-    font-weight: 600;
-
-    font-size: 14px;
-
-    margin-bottom: 6px;
-
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 7px;
 }
-
 .form-group input {
-
     width: 100%;
-
-    padding: 12px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 7px;
-
-    font-size: 14px;
-
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    font-size: 14.5px;
+    font-family: var(--font);
+    color: var(--text-primary);
     outline: none;
-
+    transition: border-color var(--t), box-shadow var(--t);
 }
-
 .form-group input:focus {
-
-    border-color: #e3293b;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(227, 41, 59, 0.10);
-
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(224,31,60,.10);
 }
+.form-group input::placeholder { color: var(--text-muted); }
 
-
-/* =====================================
-   LOGIN BUTTON
-   ===================================== */
-
+/* ---- Button ---- */
 .login-button {
-
     width: 100%;
-
     padding: 13px;
-
-    margin-top: 5px;
-
+    margin-top: 6px;
     border: none;
-
-    border-radius: 7px;
-
-    background: #d7192d;
-
-    color: white;
-
+    border-radius: var(--r-sm);
+    background: var(--red);
+    color: #fff;
     font-size: 15px;
-
-    font-weight: bold;
-
+    font-weight: 700;
+    font-family: var(--font);
     cursor: pointer;
-
+    transition: background var(--t), box-shadow var(--t);
+    letter-spacing: .2px;
 }
-
 .login-button:hover {
-
-    background: #b91425;
-
+    background: var(--red-dark);
+    box-shadow: 0 4px 14px rgba(224,31,60,.28);
 }
+.login-button:disabled { opacity: .6; cursor: not-allowed; }
 
-.login-button:disabled {
-
-    opacity: 0.65;
-
-    cursor: not-allowed;
-
-}
-
-
-/* =====================================
-   MESSAGE
-   ===================================== */
-
+/* ---- Message ---- */
 .message {
-
     display: none;
-
-    margin-top: 15px;
-
-    padding: 11px;
-
-    border-radius: 7px;
-
-    font-size: 13px;
-
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    font-size: 13.5px;
     line-height: 1.5;
-
+    text-align: left;
 }
-
 .message.success {
-
     display: block;
-
-    background: #eaf8ed;
-
-    color: #18743a;
-
-    border: 1px solid #b9e5c5;
-
+    background: var(--green-light);
+    border: 1.5px solid var(--green-border);
+    color: var(--green);
 }
-
 .message.error {
-
     display: block;
-
-    background: #ffecec;
-
-    color: #c62828;
-
-    border: 1px solid #f2b8b8;
-
+    background: var(--red-light);
+    border: 1.5px solid var(--red-border);
+    color: var(--red-dark);
 }
 
-
-/* =====================================
-   REGISTER
-   ===================================== */
-
+/* ---- Register link ---- */
 .register-section {
-
-    margin-top: 25px;
-
+    margin-top: 24px;
     padding-top: 20px;
-
-    border-top: 1px solid #eee;
-
+    border-top: 1px solid var(--border);
     font-size: 13px;
-
-    color: #777;
-
+    color: var(--text-secondary);
 }
-
+.register-section p { margin-bottom: 6px; }
 .register-section a {
-
-    display: inline-block;
-
-    margin-top: 7px;
-
-    color: #d7192d;
-
+    color: var(--red);
+    font-weight: 700;
     text-decoration: none;
-
-    font-weight: bold;
-
 }
+.register-section a:hover { text-decoration: underline; }
 
-.register-section a:hover {
-
-    text-decoration: underline;
-
-}
-
-
-/* =====================================
-   MOBILE
-   ===================================== */
-
-@media (max-width: 500px) {
-
-    .login-card {
-
-        padding: 25px 20px;
-
-    }
-
+@media (max-width: 480px) {
+    .login-card { padding: 28px 20px; }
 }

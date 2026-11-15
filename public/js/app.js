@@ -495,13 +495,39 @@ donorForm.addEventListener(
                     "gender"
                 ).value,
 
+            weight:
+                Number(
+                    document.getElementById(
+                        "weight"
+                    ).value
+                ),
+
+            healthEligible:
+                document.getElementById(
+                    "healthEligible"
+                ).checked,
+
+            lastDonationDate:
+                document.getElementById(
+                    "lastDonationDate"
+                ).value || null,
+
             latitude:
                 latitude,
 
             longitude:
                 longitude
-
         };
+
+        if (!donorData.healthEligible) {
+            result.innerHTML = `
+            <div class="error-message">
+                 Please confirm that you are currently healthy
+                 and eligible to donate blood.
+            </div>
+            `;
+            return;
+        }
 
 
         registerButton.disabled = true;

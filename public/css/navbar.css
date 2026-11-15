@@ -1,0 +1,146 @@
+/* =============================================
+   BLOOD-BRIDGE NAVBAR
+   ============================================= */
+
+@import url('./vars.css');
+
+.bb-nav {
+    background: var(--red);
+    box-shadow: 0 2px 12px rgba(224, 31, 60, .28);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    font-family: var(--font);
+}
+
+.bb-nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 60px;
+}
+
+/* ---- Brand ---- */
+.bb-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    white-space: nowrap;
+}
+.bb-nav-brand .brand-dot {
+    color: rgba(255,255,255,.65);
+}
+
+/* ---- Links ---- */
+.bb-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.bb-nav-links li { display: flex; }
+
+.bb-nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 12px;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    color: rgba(255,255,255,.82);
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: background var(--t), color var(--t);
+    white-space: nowrap;
+}
+.bb-nav-links a:hover { background: rgba(255,255,255,.14); color: #fff; }
+.bb-nav-links a.active { background: rgba(255,255,255,.20); color: #fff; }
+
+/* Emergency pill */
+.bb-emergency-link a {
+    background: rgba(255,255,255,.12);
+    color: #ffe6ea;
+}
+.bb-emergency-link a:hover,
+.bb-emergency-link a.active {
+    background: rgba(255,255,255,.24);
+    color: #fff;
+}
+
+/* Admin — subdued */
+.bb-admin-link a {
+    color: rgba(255,255,255,.58);
+    font-size: 13px;
+}
+.bb-admin-link a:hover,
+.bb-admin-link a.active {
+    color: #fff;
+    background: rgba(255,255,255,.14);
+}
+
+/* Divider */
+.bb-nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,.22);
+    margin: 0 6px;
+    display: flex !important;
+    align-self: center;
+}
+
+/* ---- Hamburger ---- */
+.bb-nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: var(--r-sm);
+    transition: background var(--t);
+}
+.bb-nav-hamburger:hover { background: rgba(255,255,255,.12); }
+.bb-nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform .22s, opacity .22s;
+}
+.bb-nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.bb-nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.bb-nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- Mobile ---- */
+@media (max-width: 720px) {
+    .bb-nav-hamburger { display: flex; }
+
+    .bb-nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0; right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        background: #c9172e;
+        padding: 10px 16px 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.18);
+    }
+    .bb-nav-links.open { display: flex; }
+    .bb-nav-links li { display: block; }
+    .bb-nav-links a { font-size: 14.5px; padding: 11px 14px; }
+    .bb-nav-divider { width: 100%; height: 1px; margin: 5px 0; }
+}

@@ -771,11 +771,15 @@ const respondToEmergency = async (
 
 
                     const requestData =
-                        requestSnapshot.data();
-
+                         requestSnapshot.data();
 
                     const donorData =
                         donorSnapshot.data();
+
+                    // Donor must be verified before accepting
+                    if (donorData.verificationStatus !== "verified") {
+                        throw new Error("DONOR_NOT_VERIFIED");
+                    }
 
 
                     // =================================
@@ -1034,6 +1038,14 @@ const respondToEmergency = async (
         // =====================================
         // FRIENDLY ERRORS
         // =====================================
+
+        if (error.message === "DONOR_NOT_VERIFIED") {
+return res.status(403).json({
+success: false,
+message:
+"Your donor account must be verified before accepting an emergency."
+});
+}
 
         if (
             error.message ===

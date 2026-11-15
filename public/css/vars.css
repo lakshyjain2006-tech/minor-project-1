@@ -1,0 +1,55 @@
+/* =============================================
+   BLOOD-BRIDGE — DESIGN TOKENS
+   Imported first by every page via style.css
+   or its own <link>
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+
+    /* Brand */
+    --red:          #e01f3c;
+    --red-dark:     #be1832;
+    --red-light:    #fff0f2;
+    --red-border:   #f5bfc8;
+
+    /* Neutrals */
+    --bg:           #f4f6f9;
+    --surface:      #ffffff;
+    --surface-2:    #f8f9fb;
+    --border:       #e3e7ee;
+    --border-dark:  #c8cdd8;
+
+    /* Text */
+    --text-primary:   #111827;
+    --text-secondary: #6b7280;
+    --text-muted:     #9ca3af;
+
+    /* Success */
+    --green:        #16a34a;
+    --green-light:  #f0fdf4;
+    --green-border: #bbf7d0;
+
+    /* Warning */
+    --amber:        #d97706;
+    --amber-light:  #fffbeb;
+    --amber-border: #fde68a;
+
+    /* Radius */
+    --r-sm:  6px;
+    --r-md:  10px;
+    --r-lg:  14px;
+    --r-xl:  20px;
+
+    /* Shadow */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.04);
+
+    /* Font */
+    --font: 'Inter', Arial, sans-serif;
+
+    /* Transition */
+    --t: 0.18s ease;
+}
